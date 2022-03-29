@@ -52,9 +52,9 @@ export default {
           authDomain: 'natupets2022.firebaseapp.com',
           projectId: 'natupets2022',
           storageBucket: 'natupets2022.appspot.com',
-          messagingSenderId: '48394893035',
-          appId: '1:48394893035:web:ed1f1d2fd41006594c30ae',
-          measurementId: 'G-MZ77FP1179',
+          messagingSenderId: process.env.NUXT_ENV_SENDER_ID,
+          appId: process.env.NUXT_ENV_APP_ID,
+          measurementId: process.env.NUXT_ENV_MEASUREMENT_ID
         },
         services: {
           auth: true, // Just as example. Can be any other service.
