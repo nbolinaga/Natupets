@@ -48,7 +48,7 @@ export default {
       '@nuxtjs/firebase',
       {
         config: {
-          apiKey: process.env.FIREBASE_API_KEY,
+          apiKey: process.env.FIREBASE_TOKEN,
           authDomain: 'natupets2022.firebaseapp.com',
           projectId: 'natupets2022',
           storageBucket: 'natupets2022.appspot.com',
