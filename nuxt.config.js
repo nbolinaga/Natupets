@@ -54,7 +54,7 @@ export default {
           storageBucket: 'natupets2022.appspot.com',
           messagingSenderId: process.env.NUXT_ENV_SENDER_ID,
           appId: process.env.NUXT_ENV_APP_ID,
-          measurementId: process.env.NUXT_ENV_MEASUREMENT_ID
+          measurementId: process.env.NUXT_ENV_MEASUREMENT_ID,
         },
         services: {
           auth: true, // Just as example. Can be any other service.

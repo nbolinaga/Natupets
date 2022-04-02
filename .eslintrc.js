@@ -14,5 +14,6 @@ module.exports = {
   rules: {
     'vue/multi-word-component-names': 'off',
     'vue/object-property-newline': 'off',
+    'object-property-newline': 'off',
   },
 }
