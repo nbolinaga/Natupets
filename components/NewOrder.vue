@@ -66,9 +66,9 @@ export default {
     totalBolivares() {
       return Math.round(this.total * this.dolar * 100) / 100
     },
-    user(){
+    user() {
       return this.$store.state.user
-    }
+    },
   },
   mounted() {
     try {
@@ -108,13 +108,7 @@ export default {
           vendidas: this.$store.state.sold,
         })
         this.$emit('confirm', this.pedido)
-        let messageBody = ''
-        if(this.pedido.pickup === true){
-          messageBody = `NATUPETS\n\nTu pedido de ${this.pedido.cantidad} comidas ha sido recibido.\n\nMonto a cancelar es de ${this.pedido.dolares} USD,\n\nCuando su pedido este listo para ser recogido recibirá otro mensaje.\n\n ¡Gracias por su compra!.\n\n${this.pedido.fecha}`
-        }
-        if(this.pedido.pickup === false){
-          messageBody = `NATUPETS\n\nTu pedido de ${this.pedido.cantidad} comidas ha sido recibido.\n\nMonto a cancelar es de ${this.pedido.dolares} USD,\n\nCuando su pedido este listo para ser enviado recibirá otro mensaje.\n\n ¡Gracias por su compra!.\n\n${this.pedido.fecha}`
-        }
+        const messageBody = `NATUPETS\n\nTu pedido de ${this.pedido.cantidad} comidas ha sido recibido.\n\nMonto a cancelar es de ${this.pedido.dolares} USD,\n\nCuando su pedido este listo para ser recogido o cuando su pedido sea enviado recibirá otro mensaje.\n\n ¡Gracias por su compra!.\n\n${this.pedido.fecha}`
         db.collection('messages').add({
           to: `whatsapp:${this.user.telefono}`,
           body: messageBody,
