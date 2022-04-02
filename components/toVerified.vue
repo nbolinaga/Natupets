@@ -1,6 +1,6 @@
 <template>
   <div
-    class="rounded-xl border-2 border-yellow-400 p-10  bg-gray-50 text-center overflow-hidden"
+    class="rounded-xl border-2 border-yellow-400 p-10 bg-gray-50 text-center overflow-hidden"
   >
     <h3
       class="-m-10 py-4 px-10 bg-yellow-400 mb-10 font-main text-[#501111] text-xl"

@@ -1,25 +1,13 @@
 <template>
   <div class="p-10 grid gap-12 grid-cols-1 md:grid-cols-2 items-start">
     <Price class="" />
-    
-     <Stock class="" />
-     <ToVerified class="" />
-   <OrderList
-      class=""
-      :pedidos="porEntregar"
-      titulo="POR ENTREGAR"
-    />
-    <OrderList
-      class=""
-      :pedidos="entregados"
-      titulo="ENTREGADOS"
-    />
-    <OrderList
-      class=""
-      :pedidos="cancelados"
-      titulo="CANCELADOS"
-    />
-    <Twilio/>
+
+    <Stock class="" />
+    <ToVerified class="" />
+    <OrderList class="" :pedidos="porEntregar" titulo="POR ENTREGAR" />
+    <OrderList class="" :pedidos="entregados" titulo="ENTREGADOS" />
+    <OrderList class="" :pedidos="cancelados" titulo="CANCELADOS" />
+    <Twilio />
   </div>
 </template>
 
@@ -44,7 +32,7 @@ export default {
     },
   },
   beforeMount() {
-    if(this.$store.state.user.admin === false){
+    if (this.$store.state.user.admin === false) {
       this.$router.push('/')
     }
     const db = this.$fireModule.firestore()
@@ -82,7 +70,17 @@ export default {
         let day = date.getDate().toString()
         day = day.length > 1 ? day : '0' + day
 
-        return day + '/' + month + '/' + year + ' - ' + date.getHours() + ':' + date.getMinutes()
+        return (
+          day +
+          '/' +
+          month +
+          '/' +
+          year +
+          ' - ' +
+          date.getHours() +
+          ':' +
+          date.getMinutes()
+        )
       } catch (e) {
         return ''
       }

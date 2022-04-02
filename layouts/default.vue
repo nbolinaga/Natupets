@@ -61,15 +61,15 @@ export default {
   row-gap: 1.5em;
 }
 .masonry-sm {
-    column-gap: 1.5em;
-    column-count: 2;
-    row-gap: 1.5em;
+  column-gap: 1.5em;
+  column-count: 2;
+  row-gap: 1.5em;
 }
 .masonry-md {
-    column-gap: 1.5em;
-    column-count: 3;
+  column-gap: 1.5em;
+  column-count: 3;
 }
 .break-inside {
-    break-inside: avoid;
+  break-inside: avoid;
 }
 </style>

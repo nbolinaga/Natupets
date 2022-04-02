@@ -7,18 +7,41 @@
     >
       {{ titulo }}
     </h3>
-    
-    <button v-if="opened == false" @click="opened = true"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
-    </svg></button>
-    <button v-if="opened == true" @click="opened = false" class="mb-6">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M5 11l7-7 7 7M5 19l7-7 7 7" />
-    </svg>
+
+    <button v-if="opened == false" @click="opened = true">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M19 13l-7 7-7-7m14-8l-7 7-7-7"
+        />
+      </svg>
     </button>
-    <p v-if="pedidos.length == 0 && opened == true" >No hay ningún pedido</p>
+    <button v-if="opened == true" class="mb-6" @click="opened = false">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M5 11l7-7 7 7M5 19l7-7 7 7"
+        />
+      </svg>
+    </button>
+    <p v-if="pedidos.length == 0 && opened == true">No hay ningún pedido</p>
     <ul v-if="opened == true">
-      
       <li
         v-for="(pedido, index) in pedidos"
         :key="index"
@@ -31,7 +54,9 @@
           </p>
         </div>
         <h4 class="text-xl mt-4">{{ pedido.cantidad }} Comidas</h4>
-        <h4 class="text-md mt-4">{{ pedido.dolares }} USD - {{ pedido.bolivares }} BsF</h4>
+        <h4 class="text-md mt-4">
+          {{ pedido.dolares }} USD - {{ pedido.bolivares }} BsF
+        </h4>
         <p class="mb-4">Pedido hecho el {{ pedido.fecha }}</p>
         <button
           v-if="!pedido.entregado && !pedido.cancelado"
@@ -129,7 +154,7 @@ export default {
   data() {
     return {
       opened: false,
-    };
+    }
   },
   methods: {
     entregarPedido(pedido) {

@@ -10,7 +10,9 @@
         </p>
       </div>
       <h4 class="text-xl mt-4">{{ pedido.cantidad }} Comidas</h4>
-      <h4 class="text-md mt-4">{{ pedido.dolares }} USD - {{ pedido.bolivares }} BsF</h4>
+      <h4 class="text-md mt-4">
+        {{ pedido.dolares }} USD - {{ pedido.bolivares }} BsF
+      </h4>
       <p class="mb-4">Pedido hecho el {{ getFormattedDate(pedido.fecha) }}</p>
       <div
         v-show="pedido.pickup"
@@ -98,7 +100,17 @@ export default {
       let day = date.getDate().toString()
       day = day.length > 1 ? day : '0' + day
 
-      return day + '/' + month + '/' + year + ' - ' + date.getHours() + ':' + date.getMinutes()
+      return (
+        day +
+        '/' +
+        month +
+        '/' +
+        year +
+        ' - ' +
+        date.getHours() +
+        ':' +
+        date.getMinutes()
+      )
     },
   },
 }
