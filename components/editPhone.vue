@@ -41,16 +41,18 @@
         type="string"
         class="px-4 py-2 text-center border-2 rounded-2xl border-yellow-400"/>
 
-    <button
-        class="text-sm bg-[#501111] rounded-3xl px-4 py-2 text-white hover:text-yellow-400">
-        <span v-if="!edit" @click="edit = true">EDITAR WHATSAPP</span><span v-if="edit" @click="editarInfoTelefono">GUARDAR</span>
-    </button>
-    <button
-        v-if="edit"
-        class="text-sm bg-[#501111] rounded-3xl px-4 py-2 text-white hover:text-yellow-400"
-        @click="edit = false; enviado = false;">
-        CANCELAR
-    </button>
+    <div class="mt-4">
+        <button
+            class="text-sm bg-[#501111] rounded-3xl px-4 py-2 text-white hover:text-yellow-400">
+            <span v-if="!edit" @click="edit = true">EDITAR WHATSAPP</span><span v-if="edit" @click="editarInfoTelefono">GUARDAR</span>
+        </button>
+        <button
+            v-if="edit"
+            class="text-sm bg-[#501111] rounded-3xl px-4 py-2 text-white hover:text-yellow-400"
+            @click="edit = false; enviado = false;">
+            CANCELAR
+        </button>
+    </div>
 </div>
 </template>
 

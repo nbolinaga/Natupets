@@ -12,7 +12,7 @@
             class="text-sm bg-[#501111] rounded-3xl px-4 py-2 text-white hover:text-yellow-400">
             <span v-if="!edit" @click="edit = true">EDITAR DIRECCIÓN</span><span v-if="edit" @click="editarInfoDireccion">GUARDAR</span>
         </button>
-        <p class="mt-4">Su dirección sera usada solo para las entregas de la comida</p>
+        <p class="mt-12">Su dirección sera usada solo para las entregas de la comida</p>
     </div>
 </template>
 
