@@ -77,7 +77,6 @@ export default {
 			lang: 'en',
 		},
 	},
-	middleware: ["auth", "verified"],
 	// Build Configuration: https://go.nuxtjs.dev/config-build
 	build: {},
 }

@@ -17,7 +17,6 @@
 
 <script>
 export default {
-    middleware: "verified",
     computed: {
 		user() {
 			return { ...this.$store.state.user }
