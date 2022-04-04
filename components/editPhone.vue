@@ -85,10 +85,6 @@ export default {
 			return { ...this.$store.state.user }
 		},
 	},
-	beforeMount() {
-		this.codeRaw = this.user.telefono.substring(0, 3)
-		this.numberRaw = this.user.telefono.substring(3)
-	},
 	methods: {
 		makeid() {
 			if (this.numberRaw.length !== 10) {

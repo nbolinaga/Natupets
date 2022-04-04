@@ -1,25 +1,35 @@
 <template>
-	<div>
+	<div v-if="user.id === null"> LOADING </div>
+	<div v-else>
+		
 		<div
 			v-if="opened"
 			class="bg-black fixed top-0 left-0 w-screen h-screen md:hidden opacity-75"></div>
 		<MobileHeader v-if="token != false" class="fixed bottom-0 left-0 md:hidden" />
 		<Header v-if="token != false" class="hidden md:flex" />
-		<Nuxt v-if="token != false" class="mb-[10vh] md:mb-0" />
+
+		<Nuxt v-if="token != false  && user.verificado" class="mb-[10vh] md:mb-0" />
+		<Verificacion v-if="token != false && !user.verificado" />
+
 		<Login v-if="token == false" />
+		
 	</div>
 </template>
 
 <script>
 import MobileHeader from '~/components/MobileHeader.vue'
+import Verificacion from '~/pages/verificacion.vue'
 export default {
-	components: { MobileHeader },
+	components: { MobileHeader, Verificacion },
 	computed: {
 		token() {
 			return this.$store.state.token
 		},
 		opened() {
 			return this.$store.state.opened
+		},
+		user() {
+			return { ...this.$store.state.user }
 		},
 	},
 	mounted() {

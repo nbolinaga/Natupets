@@ -1,5 +1,5 @@
 const user = {
-	id: ' ',
+	id: null,
 	nombre: ' ',
 	email: ' ',
 	fotoURL: ' ',
