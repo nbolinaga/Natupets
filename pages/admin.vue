@@ -1,13 +1,20 @@
 <template>
-	<div class="p-10 grid gap-12 grid-cols-1 md:grid-cols-2 items-start">
-		<Price class="" />
-
-		<Stock class="" />
-		<ToVerified class="" />
-		<OrderList class="" :pedidos="porEntregar" titulo="POR ENTREGAR" />
-		<OrderList class="" :pedidos="entregados" titulo="ENTREGADOS" />
-		<OrderList class="" :pedidos="cancelados" titulo="CANCELADOS" />
-		<Twilio />
+	<div class="p-10">
+		<OrdersTable titulo="PEDIDOS" :pedidos="pedidos" class="hidden md:block" />
+		<Price class="mt-10" />
+		<Stock class="mt-10" />
+		<OrdersMobile
+			titulo="NO ENTREGADOS"
+			:pedidos="noEntregados"
+			class="block md:hidden mt-10"/>
+		<OrdersMobile
+			titulo="ENTREGADO"
+			:pedidos="entregados"
+			class="block md:hidden mt-10"/>
+		<OrdersMobile
+			titulo="CANCELADO"
+			:pedidos="cancelado"
+			class="block md:hidden mt-10"/>
 	</div>
 </template>
 
@@ -19,16 +26,16 @@ export default {
 		}
 	},
 	computed: {
-		porEntregar() {
-			return this.pedidos.filter(
-				(pedido) => pedido.entregado === false && pedido.cancelado === false
-			)
-		},
-		cancelados() {
-			return this.pedidos.filter((pedido) => pedido.cancelado === true)
-		},
 		entregados() {
 			return this.pedidos.filter((pedido) => pedido.entregado === true)
+		},
+		cancelado() {
+			return this.pedidos.filter((pedido) => pedido.cancelado === true)
+		},
+		noEntregados() {
+			return this.pedidos.filter(
+				(pedido) => pedido.entregado === false && pedido.fechaCancelado === null
+			)
 		},
 	},
 	beforeMount() {
@@ -63,13 +70,10 @@ export default {
 			try {
 				date = date.toDate()
 				const year = date.getFullYear()
-
 				let month = (1 + date.getMonth()).toString()
 				month = month.length > 1 ? month : '0' + month
-
 				let day = date.getDate().toString()
 				day = day.length > 1 ? day : '0' + day
-
 				return (
 					day +
 					'/' +
@@ -77,12 +81,19 @@ export default {
 					'/' +
 					year +
 					' - ' +
-					date.getHours() +
+					this.pad(date.getHours()) +
 					':' +
-					date.getMinutes()
+					this.pad(date.getMinutes())
 				)
 			} catch (e) {
 				return ''
+			}
+		},
+		pad(value) {
+			if (value < 10) {
+				return '0' + value
+			} else {
+				return value
 			}
 		},
 	},

@@ -6,96 +6,101 @@
 			</h1>
 			<h3 v-if="user.admin" class="text-2xl mb-12 -mt-4">Administrador</h3>
 		</div>
-		<div class="grid gap-4 grid-cols-1 md:grid-cols-2 items-start text-center">
+		<div class="grid grid-cols-4 gap-12 items-start">
+			<OrdersTable
+				titulo="PEDIDOS"
+				:pedidos="pedidos"
+				class="col-span-3 hidden md:block"/>
 			<div
-				class="border-2 border-yellow-400 rounded-2xl bg-gray-100 pb-10 overflow-hidden">
-				<h2 class="text-xl bg-yellow-400 mb-4 font-main text-[#501111] py-4">
+				class="rounded-2xl pb-10 overflow-hidden text-center mb-10 shadow-md bg-gray-50 border-2 border-yellow-400 col-span-4 md:col-span-1">
+				<h2 class="text-lg bg-yellow-400 mb-4 font-main text-[#501111] py-4">
 					INFORMACIÓN PERSONAL
 				</h2>
-                <!-- <EditPhone :user-prop="user" /> -->
-                <h3 class="px-4 py-2 text-center text-xl mt-4">
-                    {{ user.telefono }}
-                </h3>
+				<!-- <EditPhone :user-prop="user" /> -->
+				<h3 class="px-4 py-2 text-center text-xl mt-4">
+					{{ user.telefono }}
+				</h3>
 				<EditEmail :user-prop="user" />
 				<EditDic :user-prop="user" />
 			</div>
-			<UserOrders titulo="PEDIDOS" :pedidos="porEntregar" />
-			<UserOrders titulo="PEDIDOS PASADOS" :pedidos="entregados" />
+			<OrdersMobile
+				titulo="PEDIDOS"
+				:pedidos="pedidos"
+				class="col-span-4 block md:hidden"/>
 		</div>
 	</div>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            pedidos: [],
-        };
-    },
-    computed: {
-        user() {
-            return { ...this.$store.state.user };
-        },
-        porEntregar() {
-            return this.pedidos.filter((pedido) => pedido.entregado === false && pedido.cancelado === false);
-        },
-        cancelados() {
-            return this.pedidos.filter((pedido) => pedido.cancelado === true);
-        },
-        entregados() {
-            return this.pedidos.filter((pedido) => pedido.entregado === true);
-        },
-    },
-    beforeMount() {
-        const db = this.$fireModule.firestore();
-        const query = db.collection("pedidos").orderBy("fecha", "asc");
-        query.onSnapshot((snapshot) => {
-            this.pedidos = [];
-            snapshot.forEach((res) => {
-                const pedido = {
-                    ...res.data(),
-                    id: res.id,
-                    cliente: res
-                        .data()
-                        .cliente.get()
-                        .then((res) => {
-                        pedido.cliente = res.data();
-                    }),
-                    fecha: this.getFormattedDate(res.data().fecha),
-                    fechaPago: this.getFormattedDate(res.data().fechaPago),
-                    fechaEntrega: this.getFormattedDate(res.data().fechaEntrega),
-                    fechaCancelado: this.getFormattedDate(res.data().fechaCancelado),
-                };
-                if (res.data().cliente.id === this.user.id) {
-                    this.pedidos.push(pedido);
-                }
-            });
-        });
-    },
-    methods: {
-        getFormattedDate(date) {
-            try {
-                date = date.toDate();
-                const year = date.getFullYear();
-                let month = (1 + date.getMonth()).toString();
-                month = month.length > 1 ? month : "0" + month;
-                let day = date.getDate().toString();
-                day = day.length > 1 ? day : "0" + day;
-                return (day +
-                    "/" +
-                    month +
-                    "/" +
-                    year +
-                    " - " +
-                    date.getHours() +
-                    ":" +
-                    date.getMinutes());
-            }
-            catch (e) {
-                return "";
-            }
-        },
-    },
+	data() {
+		return {
+			pedidos: [],
+		}
+	},
+	computed: {
+		user() {
+			return { ...this.$store.state.user }
+		},
+	},
+	beforeMount() {
+		const db = this.$fireModule.firestore()
+		const query = db.collection('pedidos').orderBy('fecha', 'asc')
+		query.onSnapshot((snapshot) => {
+			this.pedidos = []
+			snapshot.forEach((res) => {
+				const pedido = {
+					...res.data(),
+					id: res.id,
+					cliente: res
+						.data()
+						.cliente.get()
+						.then((res) => {
+							pedido.cliente = res.data()
+						}),
+					fecha: this.getFormattedDate(res.data().fecha),
+					fechaPago: this.getFormattedDate(res.data().fechaPago),
+					fechaEntrega: this.getFormattedDate(res.data().fechaEntrega),
+					fechaCancelado: this.getFormattedDate(res.data().fechaCancelado),
+				}
+				if (res.data().cliente.id === this.user.id) {
+					this.pedidos.push(pedido)
+				}
+			})
+		})
+	},
+	methods: {
+		getFormattedDate(date) {
+			try {
+				date = date.toDate()
+				const year = date.getFullYear()
+				let month = (1 + date.getMonth()).toString()
+				month = month.length > 1 ? month : '0' + month
+				let day = date.getDate().toString()
+				day = day.length > 1 ? day : '0' + day
+				return (
+					day +
+					'/' +
+					month +
+					'/' +
+					year +
+					' - ' +
+					this.pad(date.getHours()) +
+					':' +
+					this.pad(date.getMinutes())
+				)
+			} catch (e) {
+				return ''
+			}
+		},
+		pad(value) {
+			if (value < 10) {
+				return '0' + value
+			} else {
+				return value
+			}
+		},
+	},
 }
 </script>
 
