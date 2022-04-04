@@ -87,25 +87,34 @@ export default {
 	},
 	methods: {
 		getFormattedDate(date) {
-			const year = date.getFullYear()
-
-			let month = (1 + date.getMonth()).toString()
-			month = month.length > 1 ? month : '0' + month
-
-			let day = date.getDate().toString()
-			day = day.length > 1 ? day : '0' + day
-
-			return (
-				day +
-				'/' +
-				month +
-				'/' +
-				year +
-				' - ' +
-				date.getHours() +
-				':' +
-				date.getMinutes()
-			)
+			try {
+				date = date.toDate()
+				const year = date.getFullYear()
+				let month = (1 + date.getMonth()).toString()
+				month = month.length > 1 ? month : '0' + month
+				let day = date.getDate().toString()
+				day = day.length > 1 ? day : '0' + day
+				return (
+					day +
+					'/' +
+					month +
+					'/' +
+					year +
+					' - ' +
+					this.pad(date.getHours()) +
+					':' +
+					this.pad(date.getMinutes())
+				)
+			} catch (e) {
+				return ''
+			}
+		},
+		pad(value) {
+			if (value < 10) {
+				return '0' + value
+			} else {
+				return value
+			}
 		},
 	},
 }
