@@ -6,6 +6,7 @@ const pedido = {
 	entregado: false,
 	fecha: null,
 	pickup: false,
+	marcado: false,
 	pagado: false,
 	cancelado: false,
 	fechaEntrega: null,
