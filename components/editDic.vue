@@ -8,9 +8,13 @@
 		<h3 v-if="!edit" class="px-4 py-2 text-center text-xl">
 			{{ user.direccion }}
 		</h3>
-		<button
-			class="text-sm bg-[#501111] rounded-3xl px-4 py-2 text-white hover:text-yellow-400">
-			<span v-if="!edit" @click="edit = true">EDITAR DIRECCIÓN</span><span v-if="edit" @click="editarInfoDireccion">GUARDAR</span>
+		<button  v-if="!edit" @click="edit = true"
+			class="text-sm bg-[#501111] rounded-3xl px-4 py-2 text-white hover:text-yellow-400 mt-2">
+			EDITAR DIRECCIÓN
+		</button>
+		<button v-if="edit" @click="editarInfoDireccion"
+			class="text-sm bg-[#501111] rounded-3xl px-4 py-2 text-white hover:text-yellow-400 mt-2">
+			GUARDAR
 		</button>
 	</div>
 </template>

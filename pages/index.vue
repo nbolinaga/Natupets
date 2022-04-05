@@ -6,16 +6,12 @@
 			mascota, de manera fácil y rápida
 		</p>
 		<div class="text-center flex flex-col md:block mb-10 md:mb-4">
-			<button class="bg-[#501111] rounded-3xl px-4 ml-4 py-2 mb-6">
-				<nuxt-link to="/pedidos" class="text-white hover:text-yellow-400">
-					HACER UN PEDIDO
-				</nuxt-link>
-			</button>
-			<button class="bg-yellow-400 rounded-3xl px-4 ml-4 py-2">
-				<nuxt-link to="/perfil" class="text-white hover:text-[#501111]">
-					PERFIL
-				</nuxt-link>
-			</button>
+			<nuxt-link to="/pedidos" class="bg-[#501111] rounded-3xl px-4 ml-4 py-2 mb-6 text-white hover:text-yellow-400">
+				HACER UN PEDIDO
+			</nuxt-link>
+			<nuxt-link to="/perfil" class="bg-yellow-400 rounded-3xl px-4 ml-4 py-2 text-white hover:text-[#501111]">
+				PERFIL
+			</nuxt-link>
 		</div>
 		<img
 			src="../static/dog.jpg"
