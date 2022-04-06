@@ -1,10 +1,6 @@
 {
 	"countries": [
 		{
-			"code": "+58",
-			"name": "Venezuela"
-		},
-		{
 			"code": "+1",
 			"name": "United States"
 		},

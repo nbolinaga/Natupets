@@ -6,12 +6,15 @@
 				v-model="codeRaw"
 				:disabled="enviado"
 				name="codes"
-				class="my-4 appearance-none px-4 py-2 text-center border-2 rounded-2xl border-yellow-400 w-16">
+				class="my-4 appearance-none px-4 py-2 text-center border-2 rounded-2xl border-yellow-400 w-24">
+				<option :value="codigoVE.code" selected>
+					<p>{{getCode(codigoVE)}}</p>
+				</option>
 				<option
 					v-for="(country, index) in countriesCodes"
 					:key="index"
 					:value="country.code">
-					{{ country.code }} {{ country.name }}
+					<p>{{getCode(country)}}</p>
 				</option>
 			</select>
 			<input
@@ -82,10 +85,14 @@ export default {
 			edit: this.open,
 			countriesCodes: countries,
 			enviado: false,
-			codeRaw: '',
+			codeRaw: '+58',
 			numberRaw: '',
 			secret: '',
 			secretConfirm: null,
+			codigoVE: {
+				code: "+58",
+				name: "Venezuela"
+			},
 		}
 	},
 	computed: {
@@ -94,6 +101,12 @@ export default {
 		},
 	},
 	methods: {
+		getCode(country){
+			if(this.codeRaw === country.code){
+				return country.code
+			} 
+			return `${country.name} ${country.code}`	
+		},
 		makeid() {
 			if (this.numberRaw.length !== 10) {
 				alert(
